@@ -1,5 +1,7 @@
 ---
 import {SignIn,SignOut} from "auth-astro/components";
+import {getSession} from "auth-astro/server";
+const session = await getSession(Astro.request);
 ---
 
 
@@ -18,7 +20,18 @@ import {SignIn,SignOut} from "auth-astro/components";
                             p-2 rounded-md text-white transition hover:scale-105">
                 <i class="ri-table-alt-line">Selecciona tu mesa</i>
             </a>
+            {
+                session ?(
+                    <>
+                    <p>ola {session.user?.email} </p>
+                    <SignOut>Cerrar sesion</SignOut>
+                </>
+                ) : (
+                <>
                 <SignIn provider="google">Iniciar sesion</SignIn>
+                </>
+                )
+            }
         </div>
     </nav>
 </header>
