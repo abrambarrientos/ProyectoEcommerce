@@ -23,12 +23,12 @@ const session = await getSession(Astro.request);
             {
                 session ?(
                     <>
-                    <p>ola {session.user?.email} </p>
-                    <SignOut>Cerrar sesion</SignOut>
+                    <p>ola {session.user?.name} </p>
+                    <SignOut  class="w-auto h-auto p-2 bg-gray-200 rounded-md transition-all hover:scale-110"><i class="ri-logout-box-line"></i></SignOut>
                 </>
                 ) : (
                 <>
-                <SignIn provider="google">Iniciar sesion</SignIn>
+                <a href="Login" class="w-auto h-auto p-2 bg-gray-200 rounded-md transition-all hover:scale-110"><i class="ri-user-line"></i></a>
                 </>
                 )
             }
