@@ -1,0 +1,12 @@
+---
+const { iconClass, tittle } = Astro.props;
+---
+
+<article
+  class="w-auto h-auto flex items-center justify-center gap-4 p-1
+    bg-white shadow-md rounded-lg hover:scale-105 hover:cursor-pointer transition-all border-[1px] hover:border-[#FC8019] group"
+>
+  <i class={`${iconClass} text-gray-400 group-hover:text-[#FC8019]`}></i>
+  <h2 class=" font-light text-md group-hover:text-[#FC8019]">{tittle}</h2>
+</article>
+  

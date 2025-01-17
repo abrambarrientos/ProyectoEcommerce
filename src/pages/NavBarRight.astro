@@ -1,0 +1,56 @@
+---
+import BtnNavRight from "../components/BtnNavRight.astro"
+---
+
+<aside
+    class="SLIDEBAR fixed top-[164px] md:top-[80px] bottom-0 right-0 p-2 w-[20%] lg:w-[27%] text-center bg-white shadow-xl justify-between z-10 hidden lg:block"
+    >
+    <section class="w-full h-auto p-3 flex items-center justify-between">
+        <div>
+            <BtnNavRight icono="ri-add-line" text="Añadir cliente"/>
+        </div>
+        <div class="flex flex-row gap-2">
+            <BtnNavRight icono="ri-table-line"/>
+            <BtnNavRight icono="ri-restart-line"/>
+        </div>
+    </section>
+    <hr class="border-1 bg-slate-400" />
+    <section>
+        <!-- Additional content here -->
+    </section>
+</aside>
+
+    <!-- Botón para vistas móviles y tablets -->
+    <button
+    id="toggleButton"
+    class="fixed bottom-4 right-4 p-4 bg-[#FC8019] text-white rounded-full lg:hidden z-20"
+    >
+    <i class="ri-menu-line"></i>
+    </button>
+
+    <!-- Menú escondido para móviles y tablets -->
+    <aside
+    id="mobileMenu"
+    class="fixed bottom-0 right-0 p-2 w-[80%] h-[70%] bg-white shadow-xl z-10 hidden lg:hidden"
+    >
+    <section class="w-full h-auto p-3 flex items-center justify-between">
+        <div>
+            <BtnNavRight icono="ri-add-line" text="Añadir cliente"/>
+        </div>
+        <div class="flex flex-row gap-2">
+            <BtnNavRight icono="ri-table-line"/>
+            <BtnNavRight icono="ri-restart-line"/>
+        </div>
+    </section>
+    <hr class="border-1 bg-slate-400" />
+    <section>
+        <!-- Additional content here -->
+    </section>
+    </aside>
+
+<script type="text/javascript">
+    document.getElementById("toggleButton").addEventListener("click", () => {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("hidden");
+    });
+</script>

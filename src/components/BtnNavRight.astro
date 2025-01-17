@@ -1,0 +1,10 @@
+---
+const { icono, text } = Astro.props;
+---
+
+<a
+    href=""
+    class="w-auto h-auto p-2 flex items-center justify-center bg-gray-200 rounded-md transition-all hover:scale-105"
+>
+    <i class={`${icono} flex gap-1`}>{text}</i>
+</a>

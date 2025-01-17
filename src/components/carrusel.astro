@@ -1,0 +1,156 @@
+---
+import CardTipos from "../components/CardTipos.astro";
+---
+
+<div class="carousel w-full relative overflow-hidden">
+    <div class="carousel-inner gap-2 flex">
+        <div class="carousel-item ">
+            <CardTipos iconClass="ri-menu-5-fill" tittle="Todo" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-bread-line" tittle="Desayunos" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-bowl-line" tittle="Sopas" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-restaurant-2-line" tittle="Pasta" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-drinks-2-line" tittle="Bebidas" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-cake-line" tittle="Postres" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-pizza-line" tittle="Pizza" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-salad-line" tittle="Ensaladas" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-sandwich-line" tittle="Sandwiches" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-steak-line" tittle="Carnes" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-sushi-line" tittle="Sushi" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-ice-cream-line" tittle="Helados" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-coffee-line" tittle="Café" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-cocktail-line" tittle="Cócteles" />
+        </div>
+        <div class="carousel-item">
+            <CardTipos iconClass="ri-fruit-line" tittle="Frutas" />
+        </div>
+    </div>
+        <button class="carousel-control-prev" onclick="prevSlide()"
+            ><i class="ri-arrow-left-s-line"></i></button
+        >
+        <button class="carousel-control-next" onclick="nextSlide()"
+            ><i class="ri-arrow-right-s-line"></i></button
+        >
+    </div>
+
+    
+<style>
+  .carousel-inner{
+    transition: .3s all ease-in-out;
+  }
+  .carousel-item {
+    min-width: 20%;
+    box-sizing: border-box;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fc7f1975;
+    color: black;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .carousel-control-prev {
+    left: 10px;
+  }
+
+  .carousel-control-next {
+    right: 10px;
+  }
+
+  @media (max-width: 1200px) {
+    .carousel-item {
+      min-width: 25%; /* 4 items */
+    }
+  }
+
+  @media (max-width: 992px) {
+    .carousel-item {
+      min-width: 33.33%; /* 3 items */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-item {
+      min-width: 50%; /* 2 items */
+    }
+  }
+
+  @media (max-width: 576px) {
+    .carousel-item {
+      min-width: 100%; /* 1 item */
+    }
+  }
+</style>
+
+<script style="text/javascript">
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    const slides = document.querySelectorAll(".carousel-item");
+    const itemsPerView = getItemsPerView();
+    if (index >= slides.length - itemsPerView + 1) {
+      currentIndex = slides.length - itemsPerView;
+    } else if (index < 0) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+    const offset = -currentIndex * (100 / itemsPerView);
+    document.querySelector(".carousel-inner").style.transform =
+      `translateX(${offset}%)`;
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function getItemsPerView() {
+    const width = window.innerWidth;
+    if (width <= 576) return 1;
+    if (width <= 768) return 2;
+    if (width <= 992) return 3;
+    if (width <= 1200) return 4;
+    return 5;
+  }
+
+  window.addEventListener("resize", () => showSlide(currentIndex));
+
+  document.addEventListener("DOMContentLoaded", () => {
+    showSlide(currentIndex);
+  });
+</script>
