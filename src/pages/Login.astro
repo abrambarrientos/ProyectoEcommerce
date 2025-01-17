@@ -1,15 +1,10 @@
 ---
 import {SignIn,SignOut} from "auth-astro/components";
 import {getSession} from "auth-astro/server";
-const session = await getSession(Astro.request);
 import Layout from "../layouts/Layout.astro";
-import { onMount } from 'solid-js';
 
-onMount(() => {
-  if (session) {
-    window.location.href = '/';
-  }
-});
+const session = await getSession(Astro.request);
+
 ---
 
 
@@ -75,8 +70,7 @@ onMount(() => {
                 {
                 session ?(
                     <>
-                    <p>ola {session.user?.name} </p>
-                    <SignOut  class="w-auto h-auto p-2 bg-gray-200 rounded-md transition-all hover:scale-110"><i class="ri-logout-box-line"></i></SignOut>
+                    <SignOut  class="w-auto h-auto p-2 bg-gray-200 rounded-md transition-all hover:scale-110"><i class="ri-logout-box-line flex gap-3">Cerrar sesion</i></SignOut>
                 </>
                 ) : (
                 <>
