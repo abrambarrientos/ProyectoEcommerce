@@ -3,9 +3,9 @@ import BtnNavRight from "../components/BtnNavRight.astro";
 ---
 
 <aside
-  class="SLIDEBAR fixed top-[164px] md:top-[80px] bottom-0 right-0 p-2 w-[20%] lg:w-[27%] text-center bg-white shadow-xl 
+  class="SLIDEBAR fixed top-[164px] md:top-[80px] bottom-0 right-0 p-2 w-[20%] lg:w-[27%] text-center bg-white shadow-xl
   justify-between z-10 hidden lg:block overflow-y-auto"
-  >
+>
   <section class="w-full h-auto p-3 flex items-center justify-between">
     <div>
       <BtnNavRight icono="ri-add-line" text="Añadir cliente" />
@@ -23,8 +23,37 @@ import BtnNavRight from "../components/BtnNavRight.astro";
     <div id="cartItems" class="mt-4 space-y-2">
       <!-- Los productos añadidos se renderizarán aquí -->
     </div>
-    <div id="cartTotal" class="mt-4 text-right font-bold text-lg">
-      Total: $0.00
+  </section>
+
+  <section class="w-full h-auto  bg-white">
+    <div
+      id="cartTotal"
+      class="w-full h-auto p-4 flex flex-row items-start justify-between text-xl font-bold bg-slate-100 rounded-md"
+    >
+      Total: <span>$0.00</span>
+    </div>
+    <div class="w-full h-auto mt-4 flex flex-row items-center justify-around gap-5">
+      <a 
+      href="#" 
+      class="w-full  h-auto p-1 border-[1px] border-gray-200 rounded-md flex flex-col items-center gap-3
+      transition hover:scale-105 text-gray-400 hover:border-[#FC8019]"
+      >
+      <img src="money.svg" alt="Icono dinero" width="40px" height="40px">Efectivo</a
+      >
+      <a 
+      href="#" 
+      class="w-full h-auto p-1 border-[1px] border-gray-200 rounded-md flex flex-col items-center gap-3
+      transition hover:scale-105 text-gray-400 hover:border-[#FC8019]"
+      >
+      <img src="paypal.svg" alt="Icono dinero" width="40px" height="40px">PayPal</a
+      >
+      <a 
+      href="#" 
+      class="w-full h-auto p-1 border-[1px] border-gray-200 rounded-md flex flex-col items-center gap-3
+      transition hover:scale-105 text-gray-400 hover:border-[#FC8019]"
+      >
+      <img src="qr.svg" alt="Icono dinero" width="40px" height="40px">Qr</a
+      >
     </div>
   </section>
 </aside>
@@ -64,85 +93,11 @@ import BtnNavRight from "../components/BtnNavRight.astro";
   </section>
 </aside>
 
-<script>
+<script type="text/javascript">
   document.getElementById("toggleButton").addEventListener("click", () => {
     const mobileMenu = document.getElementById("mobileMenu");
     mobileMenu.classList.toggle("hidden");
   });
-
-  const cart = []; // Carrito de compras
-
-  function addToCart(item) {
-    const existingItem = cart.find((cartItem) => cartItem.title === item.title);
-
-    if (existingItem) {
-      existingItem.quantity += item.quantity;
-    } else {
-      cart.push(item);
-    }
-
-    updateCart();
-  }
-
-  function updateCart() {
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartItemsMobile = document.getElementById("cartItemsMobile");
-    const cartTotalMobile = document.getElementById("cartTotalMobile");
-
-    cartItems.innerHTML = "";
-    cartItemsMobile.innerHTML = "";
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-      total += item.price * item.quantity;
-
-      const cartItemHTML = `
-        <div class="flex items-center  gap-4 border-b p-2">
-          <img src="${item.image}" alt="${item.title}" class="w-16 h-16 rounded-md">
-          <div>
-            <h4 class="font-bold">${item.title}</h4>
-            <p class="text-gray-600">Precio: $${item.price.toFixed(2)}</p>
-            <div class="flex items-center gap-2 mt-1">
-              <label for="quantity-${index}" class="text-sm">Cantidad:</label>
-              <input 
-                type="number" 
-                id="quantity-${index}" 
-                class="w-16 border rounded-md px-2 py-1" 
-                value="${item.quantity}" 
-                min="1"
-                onchange="updateQuantity(${index}, this.value)"
-              >
-            </div>
-            <p class="text-gray-600 mt-1">Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
-          </div>
-          <button 
-            class="bg-red-500 text-white px-2 py-1 rounded-md ml-auto"
-            onclick="removeFromCart(${index})"
-          >
-            Eliminar
-          </button>
-        </div>
-      `;
-      cartItems.innerHTML += cartItemHTML;
-      cartItemsMobile.innerHTML += cartItemHTML;
-    });
-
-    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-    cartTotalMobile.textContent = `Total: $${total.toFixed(2)}`;
-  }
-
-  function updateQuantity(index, newQuantity) {
-    const quantity = parseInt(newQuantity, 10);
-    if (!isNaN(quantity) && quantity > 0) {
-      cart[index].quantity = quantity;
-      updateCart();
-    }
-  }
-
-  function removeFromCart(index) {
-    cart.splice(index, 1); // Elimina el producto del carrito
-    updateCart();
-  }
 </script>
+
+<script src="/public/utils/ComidaNavBar.js" defer></script>

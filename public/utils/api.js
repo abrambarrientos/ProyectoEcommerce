@@ -34,13 +34,13 @@ function renderRecipes(recipes) {
   recipes.forEach((recipe) => {
     const price = (Math.random() * 10 + 5).toFixed(2); // Precio aleatorio entre $5 y $15
     const recipeCard = document.createElement('div');
-    recipeCard.className = 'recipe-card bg-white rounded-md shadow-md p-4 flex items-start justify-between flex-col';
+    recipeCard.className = 'recipe-card bg-white rounded-md shadow-md p-4 flex items-start justify-between flex-col ';
 
     recipeCard.innerHTML = `
       <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-40 object-cover rounded-md mb-2">
       <h3 class="text-lg font-bold">${recipe.title}</h3>
       <p class="text-gray-600 mb-2">Precio: $<span class="price">${price}</span></p>
-      <div class="flex items-center  justify-between space-x-2 mb-2">
+      <div class=" w-full flex items-center justify-between space-x-2 mb-2">
         <div>
           <button class="decrement bg-gray-200 px-2 py-1 rounded">-</button>
           <span class="quantity">1</span>
