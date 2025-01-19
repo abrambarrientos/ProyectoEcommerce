@@ -1,56 +1,148 @@
 ---
-import BtnNavRight from "../components/BtnNavRight.astro"
+import BtnNavRight from "../components/BtnNavRight.astro";
 ---
 
 <aside
-    class="SLIDEBAR fixed top-[164px] md:top-[80px] bottom-0 right-0 p-2 w-[20%] lg:w-[27%] text-center bg-white shadow-xl justify-between z-10 hidden lg:block"
-    >
-    <section class="w-full h-auto p-3 flex items-center justify-between">
-        <div>
-            <BtnNavRight icono="ri-add-line" text="Añadir cliente"/>
-        </div>
-        <div class="flex flex-row gap-2">
-            <BtnNavRight icono="ri-table-line"/>
-            <BtnNavRight icono="ri-restart-line"/>
-        </div>
-    </section>
-    <hr class="border-1 bg-slate-400" />
-    <section>
-        <!-- Additional content here -->
-    </section>
+  class="SLIDEBAR fixed top-[164px] md:top-[80px] bottom-0 right-0 p-2 w-[20%] lg:w-[27%] text-center bg-white shadow-xl 
+  justify-between z-10 hidden lg:block overflow-y-auto"
+  >
+  <section class="w-full h-auto p-3 flex items-center justify-between">
+    <div>
+      <BtnNavRight icono="ri-add-line" text="Añadir cliente" />
+    </div>
+    <div class="flex flex-row gap-2">
+      <BtnNavRight icono="ri-table-line" />
+      <BtnNavRight icono="ri-restart-line" />
+    </div>
+  </section>
+  <hr class="border-1 bg-slate-400" />
+
+  <!-- Contenedor del carrito -->
+  <section id="CARRITO" class="mt-4">
+    <h2 class="text-lg font-bold">Carrito de Compras</h2>
+    <div id="cartItems" class="mt-4 space-y-2">
+      <!-- Los productos añadidos se renderizarán aquí -->
+    </div>
+    <div id="cartTotal" class="mt-4 text-right font-bold text-lg">
+      Total: $0.00
+    </div>
+  </section>
 </aside>
 
-    <!-- Botón para vistas móviles y tablets -->
-    <button
-    id="toggleButton"
-    class="fixed bottom-4 right-4 p-4 bg-[#FC8019] text-white rounded-full lg:hidden z-20"
-    >
-    <i class="ri-menu-line"></i>
-    </button>
+<!-- Botón para vistas móviles y tablets -->
+<button
+  id="toggleButton"
+  class="fixed bottom-4 right-4 p-4 bg-[#FC8019] text-white rounded-full lg:hidden z-20"
+>
+  <i class="ri-menu-line"></i>
+</button>
 
-    <!-- Menú escondido para móviles y tablets -->
-    <aside
-    id="mobileMenu"
-    class="fixed bottom-0 right-0 p-2 w-[80%] h-[70%] bg-white shadow-xl z-10 hidden lg:hidden"
-    >
-    <section class="w-full h-auto p-3 flex items-center justify-between">
-        <div>
-            <BtnNavRight icono="ri-add-line" text="Añadir cliente"/>
-        </div>
-        <div class="flex flex-row gap-2">
-            <BtnNavRight icono="ri-table-line"/>
-            <BtnNavRight icono="ri-restart-line"/>
-        </div>
-    </section>
-    <hr class="border-1 bg-slate-400" />
-    <section>
-        <!-- Additional content here -->
-    </section>
-    </aside>
+<!-- Menú escondido para móviles y tablets -->
+<aside
+  id="mobileMenu"
+  class="fixed bottom-0 right-0 p-2 w-[80%] h-[70%] bg-white shadow-xl z-10 hidden lg:hidden"
+>
+  <section class="w-full h-auto p-3 flex items-center justify-between">
+    <div>
+      <BtnNavRight icono="ri-add-line" text="Añadir cliente" />
+    </div>
+    <div class="flex flex-row gap-2">
+      <BtnNavRight icono="ri-table-line" />
+      <BtnNavRight icono="ri-restart-line" />
+    </div>
+  </section>
+  <hr class="border-1 bg-slate-400" />
+  <section>
+    <!-- Contenedor del carrito en móvil -->
+    <div id="CARRITO_MOBILE" class="mt-10">
+      <h2 class="text-lg font-bold">Carrito de Compras</h2>
+      <div id="cartItemsMobile" class="mt-4 space-y-2"></div>
+      <div id="cartTotalMobile" class="mt-4 text-right font-bold text-lg">
+        Total: $0.00
+      </div>
+    </div>
+  </section>
+</aside>
 
-<script type="text/javascript">
-    document.getElementById("toggleButton").addEventListener("click", () => {
-        const mobileMenu = document.getElementById("mobileMenu");
-        mobileMenu.classList.toggle("hidden");
+<script>
+  document.getElementById("toggleButton").addEventListener("click", () => {
+    const mobileMenu = document.getElementById("mobileMenu");
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  const cart = []; // Carrito de compras
+
+  function addToCart(item) {
+    const existingItem = cart.find((cartItem) => cartItem.title === item.title);
+
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+    } else {
+      cart.push(item);
+    }
+
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cartItemsMobile = document.getElementById("cartItemsMobile");
+    const cartTotalMobile = document.getElementById("cartTotalMobile");
+
+    cartItems.innerHTML = "";
+    cartItemsMobile.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price * item.quantity;
+
+      const cartItemHTML = `
+        <div class="flex items-center  gap-4 border-b p-2">
+          <img src="${item.image}" alt="${item.title}" class="w-16 h-16 rounded-md">
+          <div>
+            <h4 class="font-bold">${item.title}</h4>
+            <p class="text-gray-600">Precio: $${item.price.toFixed(2)}</p>
+            <div class="flex items-center gap-2 mt-1">
+              <label for="quantity-${index}" class="text-sm">Cantidad:</label>
+              <input 
+                type="number" 
+                id="quantity-${index}" 
+                class="w-16 border rounded-md px-2 py-1" 
+                value="${item.quantity}" 
+                min="1"
+                onchange="updateQuantity(${index}, this.value)"
+              >
+            </div>
+            <p class="text-gray-600 mt-1">Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
+          </div>
+          <button 
+            class="bg-red-500 text-white px-2 py-1 rounded-md ml-auto"
+            onclick="removeFromCart(${index})"
+          >
+            Eliminar
+          </button>
+        </div>
+      `;
+      cartItems.innerHTML += cartItemHTML;
+      cartItemsMobile.innerHTML += cartItemHTML;
     });
+
+    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+    cartTotalMobile.textContent = `Total: $${total.toFixed(2)}`;
+  }
+
+  function updateQuantity(index, newQuantity) {
+    const quantity = parseInt(newQuantity, 10);
+    if (!isNaN(quantity) && quantity > 0) {
+      cart[index].quantity = quantity;
+      updateCart();
+    }
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1); // Elimina el producto del carrito
+    updateCart();
+  }
 </script>
