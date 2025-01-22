@@ -1,6 +1,6 @@
-const API_KEY = 'fc0058ed0dec446a9efc204019bab581';
+// const API_KEY = 'fc0058ed0dec446a9efc204019bab581';
 const LIMIT = 20; 
-const API_URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=${LIMIT}`;
+// const API_URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=${LIMIT}`;
 
 let cart = []; // Carrito de compras
 
@@ -126,7 +126,7 @@ function renderCart(cart, container) {
           <p class="text-gray-600 mt-1">Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
         </div>
         <button 
-          class="bg-red-500 text-white px-2 py-1 rounded-md"
+          class="bg-red-600 text-black px-2 py-1 rounded-md"
           onclick="removeCartItem(${index})"
         >
           Eliminar

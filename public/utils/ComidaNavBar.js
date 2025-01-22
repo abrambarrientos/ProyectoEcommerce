@@ -31,7 +31,7 @@
         const cartItemHTML = `
             <div class="flex items-center  gap-4 border-b p-2 z-10">
             <img src="${item.image}" alt="${item.title}" class="w-16 h-16 rounded-md">
-            <div>
+            <div class="flex items-start">
                 <h4 class="font-bold">${item.title}</h4>
                 <p class="text-gray-600">Precio: $${item.price.toFixed(2)}</p>
                 <div class="flex items-center gap-2 mt-1">
@@ -48,7 +48,7 @@
                 <p class="text-gray-600 mt-1">Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
             </div>
             <button 
-                class="bg-red-500 text-white px-2 py-1 rounded-md ml-auto"
+                class=" text-black px-2 py-1 rounded-md ml-auto bg-slate-500"
                 onclick="removeFromCart(${index})"
             >
                 Eliminar

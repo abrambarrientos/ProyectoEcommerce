@@ -1,6 +1,10 @@
 ---
 import BtnNav from "../components/BtnNav.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
 ---
+
 
 <aside
 class="SLIDEBAR fixed top-[164px] md:top-[80px] bottom-0 p-2 w-[20%] lg:w-[5%]
@@ -13,7 +17,11 @@ text-center bg-white shadow-xl  justify-between z-10 overflow-y-auto"
         <BtnNav iconClass="ri-cash-line" Texto="Pagos" />
         <BtnNav iconClass="ri-briefcase-line" Texto="Ordenes" />
         <BtnNav iconClass="ri-file-chart-line" Texto="Reportes" />
-        <BtnNav iconClass="ri-settings-line" Texto="Ajustes" />
+        {session ? (
+        <BtnNav iconClass="ri-settings-line" Texto="Ajustes" href="Ajustes" />
+    ) : (
+        <BtnNav iconClass="ri-settings-line" Texto="Ajustes" href="Login" />
+    )}
     </div>
 
 </aside>

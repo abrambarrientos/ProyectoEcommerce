@@ -2,6 +2,7 @@
 import {SignIn,SignOut} from "auth-astro/components";
 import {getSession} from "auth-astro/server";
 import Layout from "../layouts/Layout.astro";
+import Inputs from "../components/Inputs.astro";
 
 const session = await getSession(Astro.request);
 
@@ -16,52 +17,16 @@ const session = await getSession(Astro.request);
         <div class="max-w-md mx-auto text-white">
         <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-            <label
-                class="font-semibold text-sm text-gray-400 pb-1 block"
-                for="fullname"
-                >Full Name</label
-            >
-            <input
-                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-100 text-black"
-                type="text"
-                id="fullname"
-            />
+                <Inputs tipo="text" texto="Nombre" />
             </div>
             <div>
-            <label
-                class="font-semibold text-sm text-gray-400 pb-1 block"
-                for="email"
-                >Email</label
-            >
-            <input
-                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-100 text-black"
-                type="email"
-                id="email"
-            />
+                <Inputs tipo="email" texto="Correo" />
             </div>
             <div>
-            <label
-                class="font-semibold text-sm text-gray-400 pb-1 block"
-                for="username"
-                >Username</label
-            >
-            <input
-                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-100 text-black "
-                type="text"
-                id="username"
-            />
+                <Inputs tipo="text" texto="Nombre de usuario" />
             </div>
             <div>
-            <label
-                class="font-semibold text-sm text-gray-400 pb-1 block"
-                for="password"
-                >Password</label
-            >
-            <input
-                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-100 text-black "
-                type="password"
-                id="password"
-            />
+                <Inputs tipo="password" texto="Constraseña" />
             </div>
         </div>
         </div>
@@ -76,7 +41,7 @@ const session = await getSession(Astro.request);
                 <>
                 <SignIn provider="google" class="flex items-center justify-center py-2 px-20 transition-colors bg-white hover:bg-gray-100 shadow-md">
                     <img src="googleIcon.svg" alt="">
-                    <span class="ml-2">Inciar sesion con google</span>
+                    <span class="ml-2">Iniciar sesion con google</span>
                 </SignIn>
                 </>
                 )
@@ -97,8 +62,7 @@ const session = await getSession(Astro.request);
             <a
             class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
             href="#"
-            >have an account? Log in</a
-            >
+            >have an account? Log in</a>
             <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
         </div>
         </div>

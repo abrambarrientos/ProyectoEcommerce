@@ -1,0 +1,12 @@
+---
+const { tipo, texto, NombreId, textoDentro } = Astro.props;
+---
+<div class="w-full h-auto flex flex-col ">
+    <label class="font-semibold text-sm text-gray-400 pb-1 flex items-center">{texto}</label>
+    <input
+        class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-100 text-black "
+        type={tipo}
+        id={NombreId}
+        placeholder={textoDentro}
+    />
+</div>
