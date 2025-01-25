@@ -3,6 +3,7 @@ const {title} = Astro.props;
 import Header from "../pages/Header.astro"
 import NavBarLeft from "../pages/NavBarLeft.astro";
 import NavBarRight from "../pages/NavBarRight.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <!doctype html>
@@ -10,7 +11,7 @@ import NavBarRight from "../pages/NavBarRight.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/imgComida.jpg" />
 		<link
 		href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
 		rel="stylesheet"
@@ -23,6 +24,7 @@ import NavBarRight from "../pages/NavBarRight.astro";
 			<Header />
 			<NavBarLeft />
 			<slot />
+			<!-- <Footer /> -->
 		</main>
 		
 	</body>

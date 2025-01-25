@@ -18,7 +18,6 @@ if (!session) {
             <p class="text-xl text-gray-400 font-light w-full">Esta informacion sera de uso publico, ten cuidado con lo que tu hagas</p>
         </div>
         <div class="w-full h-auto grid col-span-3 gap-4">
-            
             <Inputs tipo="text" texto="Nombre" />
             <article>
                 <h1 class="font-semibold text-sm text-gray-400 pb-1 block">Mensaje</h1>
@@ -27,7 +26,17 @@ if (!session) {
             <h1 class="font-semibold text-sm text-gray-400 pb-1 block">Foto</h1>
             <article class="flex flex-col w-full h-auto gap-4">
                 <div class="flex gap-5 items-center">
+                    {
+                session ?(
+                    <>
+                    <img src={session.user?.image} alt="User Image" class="w-9 h-9 rounded-full" />
+                </>
+                ) : (
+                <>
                     <img src="user.svg" alt="Icono de usuario" class="w-9 h-9 p-1 rounded-full bg-gray-300" />
+                </>
+                )
+            }
                     <a href="" class="w-auto h-auto p-1 border-[2px] border-gray-300 rounded-md shadow-sm">Cambiar</a>
                 </div>
                 <label class="font-semibold text-sm text-gray-400 pb-1 block" for="message">Escoge una foto</label>
@@ -49,10 +58,10 @@ if (!session) {
         </div>
         <div class="w-full h-auto grid col-span-3">
             <div class="w-full h-auto flex flex-col md:flex-row items-center justify-center gap-5">
-                    <Inputs tipo="text" texto="Nombre" />
-                    <Inputs tipo="text" texto="Apellido" />
+                    <Inputs tipo="text" texto="Nombre" readonly value={session?.user?.name}/>
+                    <Inputs tipo="text" texto="Apellido" value={session?.user?.name}/>
             </div>
-                <Inputs tipo="email" texto="Direccion de correo electronico" />
+                <Inputs tipo="email" texto="Direccion de correo electronico"  value={session?.user?.email}/>
                 <Inputs tipo="text" texto="Cuidad" />
                 <Inputs tipo="text" texto="Calle" />
 

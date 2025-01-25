@@ -23,8 +23,8 @@ const session = await getSession(Astro.request);
             {
                 session ?(
                     <>
-                    <p>{session.user?.name} </p>
-                    <a href="/"><SignOut class="w-auto h-auto p-2 bg-gray-200 rounded-md transition-all hover:scale-110"><i class="ri-logout-box-line"></i></SignOut></a>
+                    <img src={session.user?.image} alt="User Image" class="w-9 h-9 rounded-full" />
+                    <SignOut class="w-auto h-auto p-2 bg-gray-200 rounded-md transition-all hover:scale-110"><i class="ri-logout-box-line"></i></SignOut>
                 </>
                 ) : (
                 <>
